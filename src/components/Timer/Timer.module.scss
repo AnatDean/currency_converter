@@ -1,0 +1,16 @@
+@import "../../styles/colours.scss";
+.timer {
+  display: flex;
+  background-color: $blue;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  height: 10vh;
+  border: double 1px grey;
+  p {
+    color: $white;
+  }
+  * {
+    padding: 0.5em;
+  }
+}

@@ -6,6 +6,7 @@ import "./styles/global.scss";
 import { fetchConversion, fetchCurrencies } from "./data/api";
 import Button from "./components/Button";
 import Loader from "./components/Loader";
+import Timer from "./components/Timer";
 
 function App() {
   const [convertTo, setConvertTo] = useState(null);
@@ -99,6 +100,7 @@ function App() {
           handleClick={convertCurrencies}
         />
         {isLoading ? <Loader /> : null}
+        <Timer />
         {conversion ? (
           <p>{`${amount} ${convertFrom.currencyCode} is eqivalent to ${conversion} ${convertTo.currencyCode}`}</p>
         ) : null}
