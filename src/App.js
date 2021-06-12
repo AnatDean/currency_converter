@@ -26,10 +26,22 @@ function App() {
     handler(selection);
   };
 
+  const switchCurrencies = () => {
+    const currConvertFrom = convertFrom ? { ...convertFrom } : null;
+    const currConvertTo = convertTo ? { ...convertTo } : null;
+    setConvertFrom(currConvertTo);
+    setConvertTo(currConvertFrom);
+  };
+
   return (
     <div className="App">
       <form>
-        <TextInput showSwitch id="converter__amount" label="amount" />
+        <TextInput
+          handleAdornmentClick={switchCurrencies}
+          showSwitch
+          id="converter__amount"
+          label="amount"
+        />
         <SearchAbleDropDown
           onChange={() => {}}
           id="converter__currency--from"

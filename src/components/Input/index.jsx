@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { validateCurrency } from "../../utils/";
 import Switch from "../Switch";
 
-const TextInput = ({ id, label }) => {
+const TextInput = ({ id, label, handleAdornmentClick }) => {
   const [value, setValue] = useState("");
   const [hasError, setHasError] = useState(false);
 
@@ -29,7 +29,7 @@ const TextInput = ({ id, label }) => {
         id={id}
         value={value}
         onChange={handleChange}
-        endAdornment={<Switch handleClick={() => {}} />}
+        endAdornment={<Switch handleClick={handleAdornmentClick} />}
       />
       {hasError && (
         <FormHelperText error={hasError}>
