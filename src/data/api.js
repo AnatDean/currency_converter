@@ -9,3 +9,14 @@ export const fetchCurrencies = () => {
     }
   );
 };
+
+export const fetchConversion = ({ from, to, amount }) => {
+  /* I have exposed the api key in here so this project can quickly be ran
+   key would be on process.env.REACT_APP_API_KEY, */
+  return Axios.get(
+    `https://v6.exchangerate-api.com/v6/5ff10449bb35e2a8da9286b3/pair/${from}/${to}/${amount}`
+  ).then(({ data }) => {
+    const { conversion_result } = data;
+    return conversion_result;
+  });
+};

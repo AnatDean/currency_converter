@@ -4,7 +4,7 @@ import TextInput from "./components/Input/";
 import { getCountryFromCurrencyInitial } from "./utils/index";
 import "./styles/global.scss";
 // import { countries } from "./data/countries";
-import { fetchCurrencies } from "./data/api";
+import { fetchConversion, fetchCurrencies } from "./data/api";
 import Button from "./components/Button";
 
 function App() {
@@ -47,7 +47,16 @@ function App() {
     setConvertTo(currConvertFrom);
   };
 
-  const convertCurrencies = () => {};
+  const convertCurrencies = (e) => {
+    e.preventDefault();
+    fetchConversion({
+      from: convertFrom.currencyCode,
+      to: convertTo.currencyCode,
+      amount,
+    }).then((result) => {
+      setConversion(result);
+    });
+  };
 
   return (
     <div className="App">
@@ -79,6 +88,7 @@ function App() {
           selected={convertTo}
         />
         <Button label="Convert" handleClick={convertCurrencies} />
+        {conversion && <p>{conversion}</p>}
       </form>
     </div>
   );
