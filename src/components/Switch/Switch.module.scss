@@ -1,0 +1,9 @@
+@import "../../styles/colours.scss";
+#iconButton {
+  background-color: transparent;
+}
+#svg {
+  &:hover {
+    fill: $blue;
+  }
+}
