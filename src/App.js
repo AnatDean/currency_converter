@@ -1,4 +1,4 @@
-import TextInput from "./components/Input";
+import TextInput from "./components/Input/";
 import "./styles/global.scss";
 
 function App() {

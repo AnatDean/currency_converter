@@ -6,8 +6,8 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { validateCurrency } from "../utils";
-import Switch from "./Switch/";
+import { validateCurrency } from "../../utils/";
+import Switch from "../Switch";
 
 const TextInput = ({ id, label }) => {
   const [value, setValue] = useState("");
