@@ -25,6 +25,14 @@ function App() {
           onChange={() => {}}
           id="converter__currency--from"
           label="convert from"
+          defaultValueIndex={0}
+          {...searchAbleDropDownProps}
+        />
+        <SearchAbleDropDown
+          onChange={() => {}}
+          id="converter__currency--from"
+          label="convert to"
+          defaultValueIndex={null}
           {...searchAbleDropDownProps}
         />
       </form>
