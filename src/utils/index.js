@@ -16,3 +16,7 @@ export const validateCurrency = (input) => {
     return false;
   }
 };
+
+export const getCountryFromCurrencyInitial = (initial) => {
+  return initial.slice(0, -1);
+};
