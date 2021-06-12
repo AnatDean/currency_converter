@@ -3,7 +3,6 @@ import SearchAbleDropDown from "./components/DropDown";
 import TextInput from "./components/Input/";
 import { getCountryFromCurrencyInitial } from "./utils/index";
 import "./styles/global.scss";
-// import { countries } from "./data/countries";
 import { fetchConversion, fetchCurrencies } from "./data/api";
 import Button from "./components/Button";
 
@@ -12,7 +11,7 @@ function App() {
   const [amount, setAmount] = useState("");
   const [countries, setCountries] = useState([]);
   const [convertFrom, setConvertFrom] = useState(null);
-  const [conversion, setConversion] = useState(null);
+  const [conversion, setConversion] = useState(0);
 
   useEffect(() => {
     fetchCurrencies().then((countries) => {
@@ -88,7 +87,9 @@ function App() {
           selected={convertTo}
         />
         <Button label="Convert" handleClick={convertCurrencies} />
-        {conversion && <p>{conversion}</p>}
+        {conversion && (
+          <p>{`${amount} ${convertFrom.currencyCode} is eqivalent to ${conversion} ${convertTo.currencyCode}`}</p>
+        )}
       </form>
     </div>
   );
