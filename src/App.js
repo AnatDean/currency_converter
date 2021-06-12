@@ -46,6 +46,9 @@ function App() {
     setConvertTo(currConvertFrom);
   };
 
+  const isSubmissionDisabled =
+    convertTo !== null && convertFrom !== null && amount;
+
   const convertCurrencies = (e) => {
     e.preventDefault();
     fetchConversion({
@@ -86,10 +89,14 @@ function App() {
           setSelected={(selection) => handleSelection(selection, setConvertTo)}
           selected={convertTo}
         />
-        <Button label="Convert" handleClick={convertCurrencies} />
-        {conversion && (
+        <Button
+          label="Convert"
+          disabled={!isSubmissionDisabled}
+          handleClick={convertCurrencies}
+        />
+        {conversion ? (
           <p>{`${amount} ${convertFrom.currencyCode} is eqivalent to ${conversion} ${convertTo.currencyCode}`}</p>
-        )}
+        ) : null}
       </form>
     </div>
   );

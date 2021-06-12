@@ -11,4 +11,9 @@
   &:focus {
     background-color: darken($color: $blue, $amount: 20%);
   }
+  &:disabled {
+    background-color: darkgray;
+    color: $black;
+    cursor: not-allowed;
+  }
 }

@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Button.module.scss";
 
-const Button = ({ label, handleClick }) => {
+const Button = ({ label, handleClick, disabled }) => {
   return (
-    <button className={styles.button} onClick={handleClick}>
+    <button disabled={disabled} className={styles.button} onClick={handleClick}>
       {label}
     </button>
   );
@@ -13,6 +13,11 @@ const Button = ({ label, handleClick }) => {
 Button.propTypes = {
   label: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  disabled: false,
 };
 
 export default Button;
