@@ -9,8 +9,7 @@ import PropTypes from "prop-types";
 import { validateCurrency } from "../../utils/";
 import Switch from "../Switch";
 
-const TextInput = ({ id, label, handleAdornmentClick }) => {
-  const [value, setValue] = useState("");
+const TextInput = ({ id, label, value, setValue, handleAdornmentClick }) => {
   const [hasError, setHasError] = useState(false);
 
   const handleChange = ({ target: { value } }) => {

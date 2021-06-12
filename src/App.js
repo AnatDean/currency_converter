@@ -5,11 +5,15 @@ import { getCountryFromCurrencyInitial } from "./utils/index";
 import "./styles/global.scss";
 // import { countries } from "./data/countries";
 import { fetchCurrencies } from "./data/api";
+import Button from "./components/Button";
 
 function App() {
   const [convertTo, setConvertTo] = useState(null);
+  const [amount, setAmount] = useState("");
   const [countries, setCountries] = useState([]);
   const [convertFrom, setConvertFrom] = useState(null);
+  const [conversion, setConversion] = useState(null);
+
   useEffect(() => {
     fetchCurrencies().then((countries) => {
       setCountries(countries);
@@ -43,6 +47,8 @@ function App() {
     setConvertTo(currConvertFrom);
   };
 
+  const convertCurrencies = () => {};
+
   return (
     <div className="App">
       <form>
@@ -51,6 +57,8 @@ function App() {
           showSwitch
           id="converter__amount"
           label="amount"
+          value={amount}
+          setValue={setAmount}
         />
         <SearchAbleDropDown
           onChange={() => {}}
@@ -70,6 +78,7 @@ function App() {
           setSelected={(selection) => handleSelection(selection, setConvertTo)}
           selected={convertTo}
         />
+        <Button label="Convert" handleClick={convertCurrencies} />
       </form>
     </div>
   );
