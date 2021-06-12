@@ -12,12 +12,9 @@ const SearchAbleDropDown = ({
   getOptionLabel,
   getOptionText,
   options,
-  defaultValueIndex,
+  setSelected,
+  selected,
 }) => {
-  const [selected, setSelected] = useState(
-    defaultValueIndex === null ? null : options[defaultValueIndex]
-  );
-
   // create props out of option for flag adornment
   const createFlagProps = (option) => {
     return {
@@ -91,11 +88,11 @@ SearchAbleDropDown.propTypes = {
   getImgSrc: PropTypes.func,
   selectedProperty: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  defaultValueIndex: PropTypes.number,
+  selected: PropTypes.object.isRequired,
+  setSelected: PropTypes.func.isRequired,
 };
 SearchAbleDropDown.defaultProps = {
   getImgSrc: null,
-  defaultValueIndex: null,
 };
 
 export default SearchAbleDropDown;

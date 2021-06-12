@@ -3,8 +3,12 @@ import TextInput from "./components/Input/";
 import { getCountryFromCurrencyInitial } from "./utils/index";
 import "./styles/global.scss";
 import { countries } from "./data/countries";
+import { useState } from "react";
 
 function App() {
+  const [convertFrom, setConvertFrom] = useState(countries[0]);
+  const [convertTo, setConvertTo] = useState(null);
+
   // props for all country dropdowns
   const searchAbleDropDownProps = {
     getOptionText: (option) => `${option.initial}/ ${option.fullName}`,
@@ -17,6 +21,11 @@ function App() {
     options: countries,
   };
 
+  const handleSelection = (selection, handler) => {
+    // set null or option object based on stored property
+    handler(selection);
+  };
+
   return (
     <div className="App">
       <form>
@@ -25,15 +34,19 @@ function App() {
           onChange={() => {}}
           id="converter__currency--from"
           label="convert from"
-          defaultValueIndex={0}
           {...searchAbleDropDownProps}
+          setSelected={(selection) =>
+            handleSelection(selection, setConvertFrom)
+          }
+          selected={convertFrom}
         />
         <SearchAbleDropDown
           onChange={() => {}}
           id="converter__currency--from"
           label="convert to"
-          defaultValueIndex={null}
           {...searchAbleDropDownProps}
+          setSelected={(selection) => handleSelection(selection, setConvertTo)}
+          selected={convertTo}
         />
       </form>
     </div>
