@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Select, FormControl, InputLabel, MenuItem } from "@material-ui/core";
 import PropTypes from "prop-types";
+import styles from "./DropDown.module.scss";
 
 const DropDown = ({ label, onChange }) => {
   const [selected, setSelected] = useState("");
@@ -16,10 +17,10 @@ const DropDown = ({ label, onChange }) => {
     initial: "USD",
     fullName: "American Dollars",
   };
-  const style = {
-    textAlign: "start",
-  };
   const countries = [GBP, EUR, USD];
+  const getCountryFromCurrencyInitial = (initial) => {
+    return initial.slice(0, -1);
+  };
 
   return (
     <FormControl>
@@ -32,10 +33,17 @@ const DropDown = ({ label, onChange }) => {
         {countries.map(({ initial, fullName }) => (
           <MenuItem
             key={initial}
-            style={style}
+            className={styles.menuItem}
             selected={selected === initial}
             value={initial}
           >
+            <img
+              height={30}
+              alt={`${fullName} flag`}
+              src={`https://www.countryflags.io/${getCountryFromCurrencyInitial(
+                initial
+              )}/flat/64.png`}
+            />
             {initial}/ {fullName}
           </MenuItem>
         ))}

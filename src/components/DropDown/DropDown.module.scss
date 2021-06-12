@@ -1,0 +1,11 @@
+@import "../../styles/colours.scss";
+.menuItem {
+  border-radius: 5px;
+  img {
+    margin-right: 0.5em;
+  }
+  &:hover {
+    background-color: $blue;
+    color: $white;
+  }
+}
