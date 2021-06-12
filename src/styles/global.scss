@@ -1,4 +1,6 @@
 @import "./colours.scss";
+@import "./breakpoints.scss";
+
 .App {
   text-align: center;
   color: $black;
@@ -11,6 +13,10 @@
     flex-direction: column;
     .MuiFormControl-root {
       margin: 10px 0;
+      width: 90vw;
+      @include sm {
+        width: 40vw;
+      }
     }
   }
 }
