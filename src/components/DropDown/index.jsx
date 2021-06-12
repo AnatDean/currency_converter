@@ -1,60 +1,82 @@
 import React, { useState } from "react";
-import { Select, FormControl, InputLabel, MenuItem } from "@material-ui/core";
+import { TextField, FormControl, InputLabel } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import PropTypes from "prop-types";
 import styles from "./DropDown.module.scss";
 
-const DropDown = ({ label, onChange }) => {
-  const [selected, setSelected] = useState("");
-  const GBP = {
-    initial: "GBP",
-    fullName: "British Pound Sterling",
-  };
-  const EUR = {
-    initial: "EUR",
-    fullName: "Euro",
-  };
-  const USD = {
-    initial: "USD",
-    fullName: "American Dollars",
-  };
-  const countries = [GBP, EUR, USD];
-  const getCountryFromCurrencyInitial = (initial) => {
-    return initial.slice(0, -1);
-  };
+const SearchAbleDropDown = ({
+  label,
+  selectedProperty,
+  getImgSrc,
+  getOptionLabel,
+  getOptionText,
+  options,
+}) => {
+  const [selected, setSelected] = useState(options[0]);
+
+  const renderOption = (option) => (
+    <div
+      className={styles.menuItem}
+      selected={selected === selectedProperty(option)}
+    >
+      {getImgSrc && (
+        <img
+          height={30}
+          alt={`${getOptionLabel(option)} flag`}
+          src={`${getImgSrc(option)}`}
+        />
+      )}
+
+      {getOptionText(option)}
+    </div>
+  );
 
   return (
     <FormControl>
-      <InputLabel id={label}>{label}:</InputLabel>
-      <Select
-        autoWidth
+      <Autocomplete
         id={label}
-        onChange={({ target }) => setSelected(target.value)}
-      >
-        {countries.map(({ initial, fullName }) => (
-          <MenuItem
-            key={initial}
-            className={styles.menuItem}
-            selected={selected === initial}
-            value={initial}
-          >
-            <img
-              height={30}
-              alt={`${fullName} flag`}
-              src={`https://www.countryflags.io/${getCountryFromCurrencyInitial(
-                initial
-              )}/flat/64.png`}
-            />
-            {initial}/ {fullName}
-          </MenuItem>
-        ))}
-      </Select>
+        options={options}
+        autoHighlight
+        value={selected}
+        onChange={(event, newValue) => {
+          setSelected(
+            !newValue
+              ? newValue
+              : options.find(
+                  (option) =>
+                    selectedProperty(option) === selectedProperty(newValue)
+                )
+          );
+        }}
+        renderOption={renderOption}
+        getOptionLabel={getOptionLabel}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            inputProps={{
+              ...params.inputProps,
+              autoComplete: "new-password",
+            }}
+            label={label}
+            id={`${label}--input`}
+          />
+        )}
+      />
     </FormControl>
   );
 };
 
-DropDown.propTypes = {
+SearchAbleDropDown.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  getOptionLabel: PropTypes.func.isRequired,
+  getOptionText: PropTypes.func.isRequired,
+  getImgSrc: PropTypes.func,
+  selectedProperty: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+SearchAbleDropDown.defaultProps = {
+  getImgSrc: null,
 };
 
-export default DropDown;
+export default SearchAbleDropDown;
