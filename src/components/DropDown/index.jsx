@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TextField, FormControl, InputAdornment } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import PropTypes from "prop-types";
@@ -57,9 +57,9 @@ const SearchAbleDropDown = ({
         renderOption={renderOption}
         getOptionLabel={getOptionLabel}
         renderInput={(params) => {
-          params.InputProps.startAdornment = (
+          params.InputProps.startAdornment = !selected ? null : (
             <InputAdornment position="start">
-              {selected && <Flag {...createFlagProps(selected)} />}
+              {<Flag {...createFlagProps(selected)} />}
             </InputAdornment>
           );
           return (
@@ -88,11 +88,12 @@ SearchAbleDropDown.propTypes = {
   getImgSrc: PropTypes.func,
   selectedProperty: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selected: PropTypes.object.isRequired,
+  selected: PropTypes.object,
   setSelected: PropTypes.func.isRequired,
 };
 SearchAbleDropDown.defaultProps = {
   getImgSrc: null,
+  selected: null,
 };
 
 export default SearchAbleDropDown;

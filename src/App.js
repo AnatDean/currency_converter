@@ -1,22 +1,32 @@
+import { useEffect, useState } from "react";
 import SearchAbleDropDown from "./components/DropDown";
 import TextInput from "./components/Input/";
 import { getCountryFromCurrencyInitial } from "./utils/index";
 import "./styles/global.scss";
-import { countries } from "./data/countries";
-import { useState } from "react";
+// import { countries } from "./data/countries";
+import { fetchCurrencies } from "./data/api";
 
 function App() {
-  const [convertFrom, setConvertFrom] = useState(countries[0]);
   const [convertTo, setConvertTo] = useState(null);
+  const [countries, setCountries] = useState([]);
+  const [convertFrom, setConvertFrom] = useState(null);
+  useEffect(() => {
+    fetchCurrencies().then((countries) => {
+      setCountries(countries);
+      setConvertFrom(
+        countries.find(({ currencyCode }) => currencyCode === "GBP")
+      );
+    });
+  }, []);
 
   // props for all country dropdowns
   const searchAbleDropDownProps = {
-    getOptionText: (option) => `${option.initial}/ ${option.fullName}`,
-    getOptionLabel: (option) => option.fullName,
-    selectedProperty: (option) => option.initial,
+    getOptionText: (option) => `${option.currencyCode}/ ${option.currencyName}`,
+    getOptionLabel: (option) => option.currencyName,
+    selectedProperty: (option) => option.currencyCode,
     getImgSrc: (option) =>
       `https://www.countryflags.io/${getCountryFromCurrencyInitial(
-        option.initial
+        option.currencyCode
       )}/flat/64.png`,
     options: countries,
   };
