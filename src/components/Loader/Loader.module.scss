@@ -1,0 +1,26 @@
+@import "../../styles/colours.scss";
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.loader {
+  height: 48px;
+  width: 48px;
+  color: $blue;
+  position: relative;
+  display: inline-block;
+  border: 5px solid;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

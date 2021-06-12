@@ -5,6 +5,7 @@ import { getCountryFromCurrencyInitial } from "./utils/index";
 import "./styles/global.scss";
 import { fetchConversion, fetchCurrencies } from "./data/api";
 import Button from "./components/Button";
+import Loader from "./components/Loader";
 
 function App() {
   const [convertTo, setConvertTo] = useState(null);
@@ -12,6 +13,7 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [convertFrom, setConvertFrom] = useState(null);
   const [conversion, setConversion] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchCurrencies().then((countries) => {
@@ -51,12 +53,14 @@ function App() {
 
   const convertCurrencies = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     fetchConversion({
       from: convertFrom.currencyCode,
       to: convertTo.currencyCode,
       amount,
     }).then((result) => {
       setConversion(result);
+      setIsLoading(false);
     });
   };
 
@@ -94,6 +98,7 @@ function App() {
           disabled={!isSubmissionDisabled}
           handleClick={convertCurrencies}
         />
+        {isLoading ? <Loader /> : null}
         {conversion ? (
           <p>{`${amount} ${convertFrom.currencyCode} is eqivalent to ${conversion} ${convertTo.currencyCode}`}</p>
         ) : null}
