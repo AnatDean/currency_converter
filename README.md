@@ -1,4 +1,4 @@
-# Coop bank FE currency converter
+# Currency Converter
 
 ## 1. Clone and navigate into repository
 
