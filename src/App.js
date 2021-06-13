@@ -100,7 +100,8 @@ function App() {
           handleClick={convertCurrencies}
         />
         {isLoading ? <Loader /> : null}
-        <Timer />
+        {conversion ? <Timer conversion={conversion} /> : null}
+
         {conversion ? (
           <p>{`${amount} ${convertFrom.currencyCode} is eqivalent to ${conversion} ${convertTo.currencyCode}`}</p>
         ) : null}
