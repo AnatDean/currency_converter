@@ -17,6 +17,14 @@ export const validateCurrency = (input) => {
   }
 };
 
+/**
+ * Converts 3 characters currency codes to 2 characters country codes
+ *
+ * @param {String} e 3 character currency code e.g. GBP
+ *
+ * @returns {String}
+ */
+
 export const getCountryFromCurrencyInitial = (initial) => {
   return initial.slice(0, -1);
 };
