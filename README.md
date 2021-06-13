@@ -3,8 +3,8 @@
 ## 1. Clone and navigate into repository
 
 ```bash
-git clone https://github.com/AnatDean/coop-currency-fe
-cd coop-currency-fe
+git clone https://github.com/AnatDean/currency_converter
+cd currency_converter
 ```
 
 ## 2. Install dependencies (and wait a bit ⏰)
