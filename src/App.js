@@ -9,11 +9,15 @@ import Loader from "./components/Loader";
 import Timer from "./components/Timer";
 
 function App() {
+  // form data
   const [convertTo, setConvertTo] = useState(null);
   const [amount, setAmount] = useState("");
   const [countries, setCountries] = useState([]);
   const [convertFrom, setConvertFrom] = useState(null);
-  const [conversion, setConversion] = useState(0);
+
+  // store conversion and from/to based on requested data not what is currently in form
+  const [conversion, setConversion] = useState(null);
+
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -102,8 +106,9 @@ function App() {
         {isLoading ? <Loader /> : null}
         {conversion ? <Timer conversion={conversion} /> : null}
 
+        {/* summary of conversion applied */}
         {conversion ? (
-          <p>{`${amount} ${convertFrom.currencyCode} is eqivalent to ${conversion} ${convertTo.currencyCode}`}</p>
+          <p>{`${amount} ${conversion.convertFrom} is eqivalent to ${conversion.result} ${conversion.convertTo}`}</p>
         ) : null}
       </form>
     </div>

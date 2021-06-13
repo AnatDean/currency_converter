@@ -16,7 +16,12 @@ export const fetchConversion = ({ from, to, amount }) => {
   return Axios.get(
     `https://v6.exchangerate-api.com/v6/5ff10449bb35e2a8da9286b3/pair/${from}/${to}/${amount}`
   ).then(({ data }) => {
-    const { conversion_result } = data;
-    return conversion_result;
+    console.log(data);
+    const {
+      conversion_result: result,
+      base_code: convertFrom,
+      target_code: convertTo,
+    } = data;
+    return { result, convertFrom, convertTo };
   });
 };
