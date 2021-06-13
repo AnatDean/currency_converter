@@ -1,0 +1,17 @@
+@import "../../styles/colours.scss";
+.err {
+  display: flex;
+  text-decoration: underline 2px $red;
+  text-underline-offset: 4px;
+  cursor: default;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  height: 10vh;
+  p {
+    color: $black;
+  }
+  * {
+    padding: 0.5em;
+  }
+}

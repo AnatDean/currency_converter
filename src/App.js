@@ -7,6 +7,7 @@ import { fetchConversion, fetchCurrencies } from "./data/api";
 import Button from "./components/Button";
 import Loader from "./components/Loader";
 import Timer from "./components/Timer";
+import Err from "./components/Err";
 
 function App() {
   // form data
@@ -18,15 +19,21 @@ function App() {
   // store conversion and from/to based on requested data not what is currently in form
   const [conversion, setConversion] = useState(null);
 
+  // page states
   const [isLoading, setIsLoading] = useState(false);
+  const [hasErr, setHasErr] = useState(false);
 
   useEffect(() => {
-    fetchCurrencies().then((countries) => {
-      setCountries(countries);
-      setConvertFrom(
-        countries.find(({ currencyCode }) => currencyCode === "GBP")
-      );
-    });
+    fetchCurrencies()
+      .then((countries) => {
+        // remove any previous errors
+        if (hasErr) setHasErr(false);
+        setCountries(countries);
+        setConvertFrom(
+          countries.find(({ currencyCode }) => currencyCode === "GBP")
+        );
+      })
+      .catch((err) => setHasErr(true));
   }, []);
 
   // props for all country dropdowns
@@ -63,10 +70,17 @@ function App() {
       from: convertFrom.currencyCode,
       to: convertTo.currencyCode,
       amount,
-    }).then((result) => {
-      setConversion(result);
-      setIsLoading(false);
-    });
+    })
+      .then((result) => {
+        setConversion(result);
+        setIsLoading(false);
+        // remove any previous errors
+        if (hasErr) setHasErr(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setHasErr(true);
+      });
   };
 
   return (
@@ -104,6 +118,7 @@ function App() {
           handleClick={convertCurrencies}
         />
         {isLoading ? <Loader /> : null}
+        {hasErr ? <Err /> : null}
         {conversion ? <Timer conversion={conversion} /> : null}
 
         {/* summary of conversion applied */}
