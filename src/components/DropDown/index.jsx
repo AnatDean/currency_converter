@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import styles from "./DropDown.module.scss";
 import Flag from "../Flag";
 
+// Designed with uber reusability in mind
+
 const SearchAbleDropDown = ({
   label,
   selectedProperty,

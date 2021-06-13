@@ -117,15 +117,15 @@ function App() {
           disabled={!isSubmissionDisabled}
           handleClick={convertCurrencies}
         />
-        {isLoading ? <Loader /> : null}
-        {hasErr ? <Err /> : null}
-        {conversion ? <Timer conversion={conversion} /> : null}
-
-        {/* summary of conversion applied */}
-        {conversion ? (
-          <p>{`${amount} ${conversion.convertFrom} is eqivalent to ${conversion.result} ${conversion.convertTo}`}</p>
-        ) : null}
       </form>
+      {isLoading ? <Loader /> : null}
+      {hasErr ? <Err /> : null}
+      {conversion ? <Timer conversion={conversion} /> : null}
+
+      {/* summary of conversion applied */}
+      {conversion ? (
+        <p>{`${amount} ${conversion.convertFrom} is eqivalent to ${conversion.result} ${conversion.convertTo}`}</p>
+      ) : null}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+//mock data
 const GBP = {
   initial: "GBP",
   fullName: "British Pound Sterling",
